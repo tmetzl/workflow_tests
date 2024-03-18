@@ -1,11 +1,13 @@
+inputs:
+  username:
+    description: 'A username passed from the caller workflow'
+    default: 'john-doe'
+    required: false
+    type: string
+        
 on:
   workflow_dispatch:
-    inputs:
-      username:
-        description: 'A username passed from the caller workflow'
-        default: 'john-doe'
-        required: false
-        type: string
+    inputs: ${{ inputs }}
 
 jobs:
   print-username:
