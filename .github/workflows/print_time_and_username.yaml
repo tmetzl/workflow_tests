@@ -1,0 +1,19 @@
+name: Print time and username
+
+on:
+  workflow_dispatch:
+
+jobs:
+  print_time:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing the current time
+        uses: ./.github/workflows/print_current_time.yaml@main
+  say_hi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing username
+        uses: ./.github/workflows/print_username.yaml
+        with: 
+          username: "Tim"
+    
