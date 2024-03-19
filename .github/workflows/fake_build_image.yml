@@ -23,6 +23,8 @@ jobs:
     outputs:
       did_build_image: ${{ steps.build_image.outputs.image_built }}
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
       - name: Print path to check for changes
         run: |
           echo "images/${{ inputs.image }}/**"
