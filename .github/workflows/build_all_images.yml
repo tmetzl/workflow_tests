@@ -21,12 +21,12 @@ jobs:
   build_base_image:
     uses: ./.github/workflows/fake_build_image.yml
     with:
-      force_build: ${{ github.event_name == 'workflow_call' && inputs.force_build }}
+      force_build: ${{ github.event_name == 'workflow_dispatch' && inputs.force_build }}
       image: "base_image"
       
   build_derived_image:
     needs: [build_base_image]
     uses: ./.github/workflows/fake_build_image.yml
     with:
-      force_build: ${{ github.event_name == 'workflow_call' && (inputs.force_build || needs.build_base_image.outputs.did_build_image == 'true') }}
+      force_build: ${{ github.event_name == 'workflow_dispatch' && (inputs.force_build || needs.build_base_image.outputs.did_build_image == 'true') }}
       image: "derived_image"
