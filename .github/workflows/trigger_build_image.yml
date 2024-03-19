@@ -1,0 +1,28 @@
+name: Trigger build image
+        
+on:
+  workflow_dispatch:
+    inputs: 
+      force_build:
+        description: If the build should be forced even if there are no changes
+        type: boolean
+        required: false
+        default: false
+      image:
+        description: The image to build
+        type: string
+        required: true
+
+jobs:
+  build_base_image:
+    uses: ./.github/workflows/fake_build_image.yml
+    with:
+      force_build: ${{ inputs.force_build }}
+      image: "base_image"
+  build_derived_image:
+    needs: [build_base_image]
+    uses: ./.github/workflows/fake_build_image.yml
+    if: ${{ needs.build_base_image.outputs.did_build_image == "true" }}
+    with:
+      force_build: ${{ inputs.force_build }}
+      image: "derived_image"
