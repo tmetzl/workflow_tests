@@ -8,10 +8,6 @@ on:
         type: boolean
         required: false
         default: false
-      image:
-        description: The image to build
-        type: string
-        required: true
 
 jobs:
   build_base_image:
