@@ -16,4 +16,7 @@ jobs:
   print_date:
     uses: ./.github/workflows/print_current_time.yaml
     needs: [say_hi]
+  print_dir:
+    uses: ./.github/workflows/ls_workflow.yaml
+    needs: [say_hi]
     
