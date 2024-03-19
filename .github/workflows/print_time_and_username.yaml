@@ -10,9 +10,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Printing the current time
-        uses: ./.github/workflows/print_current_time.yaml
+        uses: ./.github/workflows/print_current_time
       - name: Printing username
-        uses: ./.github/workflows/print_username.yaml
+        uses: ./.github/workflows/print_username
         with: 
           username: "Tim"
     
