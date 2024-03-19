@@ -1,0 +1,17 @@
+name: Build images
+on: 
+  push:
+    paths: images/**
+  pull_request:
+    paths: images/**
+
+jobs:
+  print_ref:
+    runs-on: ubuntu-latest
+    steps:
+      - id: print_branch
+        run: echo ${{ github.ref }}
+  build_all_images:
+    uses: './.github/workflows/build_all_images.yml'
+    with:
+      force_build: false
