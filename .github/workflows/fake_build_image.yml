@@ -16,6 +16,8 @@ on:
 jobs:
   print-dir:
     runs-on: ubuntu-latest
+    outputs:
+      did_build_image: ${{ steps.build_image.outputs.image_built }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -32,9 +34,11 @@ jobs:
               images/${{ inputs.image }}/**
 
       - name: Build
+        id: build_image
         if: ${{ inputs.force_build || steps.changes.outputs.image_changed == 'true' }}
         run: |
           echo "We build ${{ inputs.image }}"
+          echo "image_built=true" >> "$GITHUB_OUTPUT"
       - name: No Build
         if: ${{ !inputs.force_build && steps.changes.outputs.image_changed != 'true' }} 
         run: |
