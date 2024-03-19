@@ -1,0 +1,14 @@
+name: Print Username
+description: Prints the username given as input        
+
+inputs:
+  username:
+    description: 'A username passed from the caller workflow'
+    default: 'john-doe'
+    required: false
+    type: string
+
+runs:
+  steps:
+    - name: Print the input name to STDOUT
+      run: echo The username is ${{ inputs.username }}
