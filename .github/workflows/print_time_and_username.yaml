@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  print_time_and_say_hi:
+  say_hi:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -13,4 +13,7 @@ jobs:
         uses: ./.github/actions/print_username
         with: 
           username: "Tim"
+  print_date:
+    uses: ./.github/workflows/print_current_time.yaml
+    needs: [say_hi]
     
