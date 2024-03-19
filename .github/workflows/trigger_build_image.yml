@@ -10,6 +10,11 @@ on:
         default: false
 
 jobs:
+  checkout_repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
   build_base_image:
     uses: ./.github/workflows/fake_build_image.yml
     with:
