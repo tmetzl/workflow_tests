@@ -12,6 +12,8 @@ on:
 jobs:
   say_hi:
     runs-on: ubuntu-latest
+    outputs:
+      did_say_hi: ${{ steps.update_output.outputs.did_say_hi }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -20,6 +22,19 @@ jobs:
         uses: ./.github/actions/print_username
         with: 
           username: "Tim"
+      - id: update_output
+        if: ${{ inputs.should_say_hi }}
+        run: echo "did_say_hi=true" >> "$GITHUB_OUTPUT"
+  check_output:
+    runs-on: ubuntu-latest
+    needs: [say_hi]
+    steps:
+      - env:
+          DID_SAY_HI: ${{needs.say_hi.outputs.did_say_hi }}
+      - id: print_output
+        run: |
+          echo "Checking the output of say_hi"
+          echo "$DID_SAY_HI"
   print_date:
     uses: ./.github/workflows/print_current_time.yaml
     needs: [say_hi]
