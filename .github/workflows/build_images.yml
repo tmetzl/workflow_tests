@@ -5,11 +5,6 @@ on:
       - main
       - dev
     paths: images/**
-  pull_request:
-    branches:
-      - main
-      - dev
-    paths: images/**
 
 jobs:
   print_ref:
