@@ -10,13 +10,7 @@ on:
         default: false
 
 jobs:
-  checkout_repo:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
   build_base_image:
-    needs: checkout_repo
     uses: ./.github/workflows/fake_build_image.yml
     with:
       force_build: ${{ inputs.force_build }}
