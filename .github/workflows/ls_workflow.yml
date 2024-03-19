@@ -2,6 +2,7 @@ name: Print current directory
         
 on:
   workflow_dispatch:
+  workflow_call:
         
 jobs:
   print-dir:
@@ -13,3 +14,4 @@ jobs:
         run: |
           cd ./.github/workflows
           ls -al
+          echo {{ github.ref }}
