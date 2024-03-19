@@ -1,8 +1,14 @@
 name: Build images
 on: 
   push:
+    branches:
+      - main
+      - dev
     paths: images/**
   pull_request:
+    branches:
+      - main
+      - dev
     paths: images/**
 
 jobs:
