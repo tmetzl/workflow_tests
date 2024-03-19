@@ -1,0 +1,29 @@
+name: Print time and username conditionally
+
+on:
+  workflow_dispatch:
+    inputs:
+      should_say_hi:
+        description: 'If the print user_name workflow should be used'
+        default: true
+        required: false
+        type: boolean
+
+jobs:
+  say_hi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Printing the name
+        if: ${{ inputs.should_say_hi }}
+        uses: ./.github/actions/print_username
+        with: 
+          username: "Tim"
+  print_date:
+    uses: ./.github/workflows/print_current_time.yaml
+    needs: [say_hi]
+  print_dir:
+    uses: ./.github/workflows/ls_workflow.yml
+    needs: [say_hi]
+    
