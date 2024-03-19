@@ -1,0 +1,41 @@
+name: Pretend to build image
+        
+on:
+  workflow_call:
+    inputs: 
+      force_build:
+        description: If the build should be forced even if there are no changes
+        type: boolean
+        required: false
+        default: false
+      image:
+        description: The image to build
+        type: string
+        required: true
+        
+jobs:
+  print-dir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Print path to check for changes
+        run: |
+          echo "images/${{ inputs.image }}/**"
+      - name: Check if files changed
+        if: ${{ ! inputs.force_build }}
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            image_changed:
+              images/${{ inputs.image }}/**
+
+      - name: Build
+        if: ${{ inputs.force_build || steps.changes.outputs.image_changed == 'true' }}
+        run: |
+          echo "We build ${{ inputs.image }}"
+      - name: No Build
+        if: ${{ !inputs.force_build && steps.changes.outputs.image_changed != 'true' }} 
+        run: |
+          echo "No build for ${{ inputs.image }}"
