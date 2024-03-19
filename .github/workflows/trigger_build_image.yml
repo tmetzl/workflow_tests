@@ -18,7 +18,7 @@ jobs:
   build_derived_image:
     needs: [build_base_image]
     uses: ./.github/workflows/fake_build_image.yml
-    if: ${{ needs.build_base_image.outputs.did_build_image == "true" }}
+    if: ${{ needs.build_base_image.outputs.did_build_image == 'true' }}
     with:
       force_build: ${{ inputs.force_build }}
       image: "derived_image"
