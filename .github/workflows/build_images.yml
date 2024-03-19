@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: print_branch
-        run: echo ${{ github.ref }}
+        run: echo ${GITHUB_REF#refs/*/}
   build_all_images:
     uses: './.github/workflows/build_all_images.yml'
     with:
