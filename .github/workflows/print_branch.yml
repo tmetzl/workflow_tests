@@ -14,4 +14,4 @@ jobs:
     name: 'This is my name: ${GITHUB_REF##*/}'
     uses: ./.github/workflows/print_username.yaml
     with:
-      username: ${GITHUB_REF##*/}
+      username: Tom
