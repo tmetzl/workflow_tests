@@ -18,6 +18,7 @@ on:
         
 jobs:
   print-username:
+    name: Hello ${{ inputs.username }}
     runs-on: ubuntu-latest
 
     steps:
