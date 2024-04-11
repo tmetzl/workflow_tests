@@ -13,6 +13,10 @@ on:
         type: boolean
         required: false
         default: false
+      image:
+        description: The image to build
+        type: string
+        required: true
     outputs:
       did_build_image:
         description: If the image was built
