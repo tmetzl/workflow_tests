@@ -24,7 +24,7 @@ jobs:
         run: |
           echo "${{ toJson(needs.build_base_image.outputs) }}"
       - name: Conditional run
-        if: ${{ needs.build_base_image.outputs.did_build_image == 'true' }}
+        if: ${{ inputs.force_build || needs.build_base_image.outputs.did_build_image == 'true' }}
         run: |
           echo "Yes"
       
