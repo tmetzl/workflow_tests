@@ -1,0 +1,33 @@
+run-name: Build ${{ inputs.image_name }}:${{ inputs.image_tag }}
+
+on:
+  workflow_call:
+    inputs:
+      force_build:
+        description: If the build should be forced even if there are no changes
+        type: boolean
+        required: false
+        default: false
+      push:
+        description: Push the image to the registry
+        type: boolean
+        required: false
+        default: false
+    outputs:
+      did_build_image:
+        description: If the image was built
+        value: ${{ jobs.build_and_push_image.outputs.did_build_image }}
+
+jobs:
+  build_and_push_image:
+    name: ${{ inputs.image_name }}:${{ inputs.image_tag }}
+    runs-on: ubuntu-latest
+    outputs:
+      did_build_image: ${{ steps.set_output.outputs.image_built }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Set output (image was built)
+        id: set_output
+        run: |
+          echo "image_built=true" >> $GITHUB_OUTPUT
