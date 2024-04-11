@@ -23,6 +23,10 @@ jobs:
       - name: Print output
         run: |
           echo "${{ toJson(needs.build_base_image.outputs) }}"
+      - name: Conditional run
+        if: ${{ needs.build_base_image.outputs.did_build_image == 'true' }}
+        run: |
+          echo "Yes"
       
   build_derived_image:
     needs: [build_base_image]
