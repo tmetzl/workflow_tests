@@ -15,6 +15,14 @@ jobs:
     with:
       force_build: ${{ inputs.force_build }}
       image: "base_image"
+
+  print_base_image_outputs:
+    needs: [build_base_image]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print output
+        run: |
+          echo "${{ toJson(needs.build_base_image.outputs) }}"
       
   build_derived_image:
     needs: [build_base_image]
