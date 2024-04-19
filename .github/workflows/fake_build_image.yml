@@ -12,6 +12,11 @@ on:
         description: The image to build
         type: string
         required: true
+      image_path:
+        description: The path to the image
+        type: string
+        required: false
+        default: images/${{ inputs.image }}
     outputs:
       did_build_image:
         description: If the image was built
@@ -27,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Print path to check for changes
         run: |
-          echo "images/${{ inputs.image }}/**"
+          echo "${{ inputs.image_path }}/**"
       - name: Check if files changed
         if: ${{ ! inputs.force_build }}
         uses: dorny/paths-filter@v3
