@@ -11,7 +11,7 @@ on:
 
 jobs:
   build_base_image:
-    uses: ./.github/workflows/fake_build_image2.yml
+    uses: ./.github/workflows/fake_build_image.yml
     with:
       force_build: ${{ inputs.force_build }}
       image: "base_image"
